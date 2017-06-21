@@ -1,0 +1,257 @@
+library(readr)
+opendata10512M030 <- read_csv("C:/Users/Star/Downloads/opendata10512M030.csv",
+skip = 1)
+View(opendata10512M030)
+opendata105Y020 <- read_csv("C:/Users/Star/Downloads/opendata105Y020.csv",
+skip = 1)
+View(opendata105Y020)
+#install.packages("data.table")
+#install.packages("dplyr")
+dimnames(opendata105Y020)[[2]][2]<-"County"
+dimnames(opendata105Y020)[[2]][3]<-"Village"
+library(dplyr)
+group_by(opendata105Y020,County) %>%
+summarise(nVillage=n()) %>%
+arrange(desc(nVillage))
+dimnames(opendata10512M030)[[2]][2]<-"County"
+dimnames(opendata10512M030)[[2]][3]<-"Village"
+dimnames(opendata10512M030)[[2]][5]<-"Population"
+library(dplyr)
+group_by(opendata10512M030,County) %>%
+summarise(meanPopulation=round(mean(Population))) %>%
+arrange(desc(meanPopulation))
+dimnames(opendata105Y020)[[2]][5]<-"PhDMen"
+dimnames(opendata105Y020)[[2]][6]<-"PhDWomen"
+library(dplyr)
+opendata105Y020<-mutate(opendata105Y020,PhDSum=PhDMen+PhDWomen)
+group_by(opendata105Y020,County) %>%
+summarise(totalPhDOfCounty=sum(PhDSum)) %>%
+arrange(desc(totalPhDOfCounty))
+#這是R Code Chunk
+dimnames(opendata105Y020)[[2]][9]<-"MS_Men"
+dimnames(opendata105Y020)[[2]][10]<-"MS_Women"
+dimnames(opendata10512M030)[[2]][6]<-"Population_Men"
+dimnames(opendata10512M030)[[2]][7]<-"Population_Women"
+group_by(opendata105Y020,County) %>%
+summarise(MS_MenOfCounty=sum(MS_Men))
+group_by(opendata105Y020,County) %>%
+summarise(MS_WomenOfCounty=sum(MS_Women))
+group_by(opendata10512M030,County) %>%
+summarise(Population_MenOfCounty=sum(MS_Men))
+dimnames(opendata105Y020)[[2]][9]<-"MS_Men"
+dimnames(opendata105Y020)[[2]][10]<-"MS_Women"
+dimnames(opendata10512M030)[[2]][6]<-"Population_Men"
+dimnames(opendata10512M030)[[2]][7]<-"Population_Women"
+group_by(opendata105Y020,County) %>%
+summarise(MS_MenOfCounty=sum(MS_Men))
+group_by(opendata105Y020,County) %>%
+summarise(MS_WomenOfCounty=sum(MS_Women))
+group_by(opendata10512M030,County) %>%
+summarise(Population_MenOfCounty=sum(Population_Men))
+group_by(opendata10512M030,County) %>%
+summarise(Population_WomenOfCounty=sum(Population_Women))
+inner_join(opendata105Y020,opendata10512M030,by="County")
+dimnames(opendata105Y020)[[2]][9]<-"MS_Men"
+dimnames(opendata105Y020)[[2]][10]<-"MS_Women"
+dimnames(opendata10512M030)[[2]][6]<-"Population_Men"
+dimnames(opendata10512M030)[[2]][7]<-"Population_Women"
+group_by(opendata105Y020,County) %>%
+summarise(MS_MenOfCounty=sum(MS_Men))
+group_by(opendata105Y020,County) %>%
+summarise(MS_WomenOfCounty=sum(MS_Women))
+group_by(opendata10512M030,County) %>%
+summarise(Population_MenOfCounty=sum(Population_Men))
+group_by(opendata10512M030,County) %>%
+summarise(Population_WomenOfCounty=sum(Population_Women))
+inner_join(opendata105Y020,opendata10512M030,by="County")
+library(dplyr)
+inner_join(opendata105Y020,opendata10512M030,by=County)
+library(dplyr)
+inner_join(opendata105Y020,opendata10512M030,by="County")
+a<-inner_join(opendata105Y020,opendata10512M030,by="County")
+View(a)
+library(dplyr)
+a<-inner_join(opendata105Y020,opendata10512M030,by=c("County","Village"))
+library(dplyr)
+a<-inner_join(opendata105Y020,opendata10512M030,by=c("County","Village"))
+View(a)
+dimnames(opendata105Y020)[[2]][9]<-"MS_Men"
+dimnames(opendata105Y020)[[2]][10]<-"MS_Women"
+dimnames(opendata10512M030)[[2]][6]<-"Population_Men"
+dimnames(opendata10512M030)[[2]][7]<-"Population_Women"
+education<-group_by(opendata105Y020,County) %>%
+summarise(MS_MenOfCounty=sum(MS_Men),MS_WomenOfCounty=sum(MS_Women))
+population<-group_by(opendata10512M030,County) %>%
+summarise(Population_MenOfCounty=sum(Population_Men),Population_WomenOfCounty=sum(Population_Women))
+library(dplyr)
+a<-inner_join(education,population,by=c("County"))
+View(a)
+dimnames(opendata105Y020)[[2]][5]<-"PhD_Men"
+dimnames(opendata105Y020)[[2]][6]<-"PhD_Women"
+library(dplyr)
+opendata105Y020<-mutate(opendata105Y020,PhD_Sum=PhD_Men+PhD_Women)
+group_by(opendata105Y020,County) %>%
+summarise(totalPhDOfCounty=sum(PhD_Sum)) %>%
+arrange(desc(totalPhDOfCounty))
+MSDF<-inner_join(education,population,by=c("County"))
+View(MSDF)
+library(readr)
+opendata10512M030 <- read_csv("C:/Users/Star/Downloads/opendata10512M030.csv",
+skip = 1)
+View(opendata10512M030)
+opendata105Y020 <- read_csv("C:/Users/Star/Downloads/opendata105Y020.csv",
+skip = 1)
+View(opendata105Y020)
+#install.packages("data.table")
+#install.packages("dplyr")
+dimnames(opendata105Y020)[[2]][2]<-"County"
+dimnames(opendata105Y020)[[2]][3]<-"Village"
+library(dplyr)
+issue1<-group_by(opendata105Y020,County) %>%
+summarise(nVillage=n()) %>%
+arrange(desc(nVillage))
+knitr::kable(issue1)
+dimnames(opendata10512M030)[[2]][2]<-"County"
+dimnames(opendata10512M030)[[2]][3]<-"Village"
+dimnames(opendata10512M030)[[2]][5]<-"Population"
+library(dplyr)
+issue2<-group_by(opendata10512M030,County) %>%
+summarise(meanPopulation=round(mean(Population))) %>%
+arrange(desc(meanPopulation))
+knitr::kable(issue2)
+dimnames(opendata105Y020)[[2]][5]<-"PhD_Men"
+dimnames(opendata105Y020)[[2]][6]<-"PhD_Women"
+library(dplyr)
+opendata105Y020<-mutate(opendata105Y020,PhD_Sum=PhD_Men+PhD_Women)
+issue3<-group_by(opendata105Y020,County) %>%
+summarise(totalPhDOfCounty=sum(PhD_Sum)) %>%
+arrange(desc(totalPhDOfCounty))
+knitr::kable(issue3)
+dimnames(opendata105Y020)[[2]][9]<-"MS_Men"
+dimnames(opendata105Y020)[[2]][10]<-"MS_Women"
+dimnames(opendata10512M030)[[2]][6]<-"Population_Men"
+dimnames(opendata10512M030)[[2]][7]<-"Population_Women"
+education<-group_by(opendata105Y020,County) %>%
+summarise(MS_MenOfCounty=sum(MS_Men),MS_WomenOfCounty=sum(MS_Women))
+population<-group_by(opendata10512M030,County) %>%
+summarise(Population_MenOfCounty=sum(Population_Men),Population_WomenOfCounty=sum(Population_Women))
+library(dplyr)
+MSDF<-inner_join(education,population,by=c("County"))
+knitr::kable(MSDF)
+MenMSRate<-MSDF$MS_MenOfCounty/MSDF$Population_MenOfCounty
+WomenMSRate<-MSDF$MS_WomenOfCounty/MSDF$Population_WomenOfCounty
+MSDF<-mutate(MSDF,MenMSRate,WomenMSRate,difference=MenMSRate-WomenMSRate)
+View(MSDF)
+MenMSRate<-round(MSDF$MS_MenOfCounty/MSDF$Population_MenOfCounty*100,2)
+WomenMSRate<-round(MSDF$MS_WomenOfCounty/MSDF$Population_WomenOfCounty*100,2)
+MSDF<-mutate(MSDF,MenMSRate,WomenMSRate,difference=MenMSRate-WomenMSRate)
+MenMSRate<-round(MSDF$MS_MenOfCounty/MSDF$Population_MenOfCounty*100,2)
+WomenMSRate<-round(MSDF$MS_WomenOfCounty/MSDF$Population_WomenOfCounty*100,2)
+MSDF<-mutate(MSDF,MenMSRate,WomenMSRate,difference=MenMSRate-WomenMSRate)
+View(MSDF)
+library(readr)
+opendata10512M030 <- read_csv("C:/Users/Star/Downloads/opendata10512M030.csv",
+skip = 1)
+View(opendata10512M030)
+opendata105Y020 <- read_csv("C:/Users/Star/Downloads/opendata105Y020.csv",
+skip = 1)
+View(opendata105Y020)
+#install.packages("data.table")
+#install.packages("dplyr")
+dimnames(opendata105Y020)[[2]][2]<-"County"
+dimnames(opendata105Y020)[[2]][3]<-"Village"
+library(dplyr)
+issue1<-group_by(opendata105Y020,County) %>%
+summarise(nVillage=n()) %>%
+arrange(desc(nVillage))
+knitr::kable(issue1)
+dimnames(opendata10512M030)[[2]][2]<-"County"
+dimnames(opendata10512M030)[[2]][3]<-"Village"
+dimnames(opendata10512M030)[[2]][5]<-"Population"
+library(dplyr)
+issue2<-group_by(opendata10512M030,County) %>%
+summarise(meanPopulation=round(mean(Population))) %>%
+arrange(desc(meanPopulation))
+knitr::kable(issue2)
+dimnames(opendata105Y020)[[2]][5]<-"PhD_Men"
+dimnames(opendata105Y020)[[2]][6]<-"PhD_Women"
+library(dplyr)
+opendata105Y020<-mutate(opendata105Y020,PhD_Sum=PhD_Men+PhD_Women)
+issue3<-group_by(opendata105Y020,County) %>%
+summarise(totalPhDOfCounty=sum(PhD_Sum)) %>%
+arrange(desc(totalPhDOfCounty))
+knitr::kable(issue3)
+dimnames(opendata105Y020)[[2]][9]<-"MS_Men"
+dimnames(opendata105Y020)[[2]][10]<-"MS_Women"
+dimnames(opendata10512M030)[[2]][6]<-"Population_Men"
+dimnames(opendata10512M030)[[2]][7]<-"Population_Women"
+education<-group_by(opendata105Y020,County) %>%
+summarise(MS_MenOfCounty=sum(MS_Men),MS_WomenOfCounty=sum(MS_Women))
+population<-group_by(opendata10512M030,County) %>%
+summarise(Population_MenOfCounty=sum(Population_Men),Population_WomenOfCounty=sum(Population_Women))
+library(dplyr)
+MSDF<-inner_join(education,population,by=c("County"))
+knitr::kable(MSDF)
+MenMSRate<-round(MSDF$MS_MenOfCounty/MSDF$Population_MenOfCounty*100,2)
+WomenMSRate<-round(MSDF$MS_WomenOfCounty/MSDF$Population_WomenOfCounty*100,2)
+MSDF<-mutate(MSDF,MenMSRate,WomenMSRate,difference=MenMSRate-WomenMSRate)
+MSDF$difference>0
+table(MSDF$difference>0)
+order(MSDF,MSDF$difference)
+MSDF[order(MSDF$difference)]
+a<-MSDF[order(MSDF$difference)]
+a<-MSDF[order(MSDF$difference),]
+View(a)
+knitr::kable(table(MSDF$difference>0))
+library(readr)
+opendata10512M030 <- read_csv("C:/Users/Star/Downloads/opendata10512M030.csv",
+skip = 1)
+View(opendata10512M030)
+opendata105Y020 <- read_csv("C:/Users/Star/Downloads/opendata105Y020.csv",
+skip = 1)
+View(opendata105Y020)
+#install.packages("data.table")
+#install.packages("dplyr")
+dimnames(opendata105Y020)[[2]][2]<-"County"
+dimnames(opendata105Y020)[[2]][3]<-"Village"
+library(dplyr)
+issue1<-group_by(opendata105Y020,County) %>%
+summarise(nVillage=n()) %>%
+arrange(desc(nVillage))
+knitr::kable(issue1)
+dimnames(opendata10512M030)[[2]][2]<-"County"
+dimnames(opendata10512M030)[[2]][3]<-"Village"
+dimnames(opendata10512M030)[[2]][5]<-"Population"
+library(dplyr)
+issue2<-group_by(opendata10512M030,County) %>%
+summarise(meanPopulation=round(mean(Population))) %>%
+arrange(desc(meanPopulation))
+knitr::kable(issue2)
+dimnames(opendata105Y020)[[2]][5]<-"PhD_Men"
+dimnames(opendata105Y020)[[2]][6]<-"PhD_Women"
+library(dplyr)
+opendata105Y020<-mutate(opendata105Y020,PhD_Sum=PhD_Men+PhD_Women)
+issue3<-group_by(opendata105Y020,County) %>%
+summarise(totalPhDOfCounty=sum(PhD_Sum)) %>%
+arrange(desc(totalPhDOfCounty))
+knitr::kable(issue3)
+dimnames(opendata105Y020)[[2]][9]<-"MS_Men"
+dimnames(opendata105Y020)[[2]][10]<-"MS_Women"
+dimnames(opendata10512M030)[[2]][6]<-"Population_Men"
+dimnames(opendata10512M030)[[2]][7]<-"Population_Women"
+education<-group_by(opendata105Y020,County) %>%
+summarise(MS_MenOfCounty=sum(MS_Men),MS_WomenOfCounty=sum(MS_Women))
+population<-group_by(opendata10512M030,County) %>%
+summarise(Population_MenOfCounty=sum(Population_Men),Population_WomenOfCounty=sum(Population_Women))
+library(dplyr)
+MSDF<-inner_join(education,population,by=c("County"))
+knitr::kable(MSDF)
+MenMSRate<-round(MSDF$MS_MenOfCounty/MSDF$Population_MenOfCounty*100,2)
+WomenMSRate<-round(MSDF$MS_WomenOfCounty/MSDF$Population_WomenOfCounty*100,2)
+MSDF<-mutate(MSDF,MenMSRate,WomenMSRate,difference=MenMSRate-WomenMSRate)
+knitr::kable(table(MSDF$difference>0))
+table(MSDF$difference>0)
+a<-mean(MSDF$difference)
+b<-median(MSDF$difference)
+WomenMoreMS<-MSDF[order(MSDF$difference),]
+View(WomenMoreMS)
